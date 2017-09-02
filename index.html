@@ -1,43 +1,76 @@
+<!DOCTYPE html>
 <html>
-<head>
+    <head>
 
-<script type="text/javascript">
-    var url = 'http://vneformate.ru/phones.json';
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+
+    <script language="javascript" src="js/crossdomain-ajax.js"></script>
+    <script src="js/script.js"></script>
 
 
-    function doCallOtherDomain(){
-        var XHR = window.XDomainRequest || window.XMLHttpRequest
-        var xhr = new XHR();
 
-        xhr.open('GET', url, true);
+        <title>Hello World</title>
 
-        // замена onreadystatechange
-        xhr.onload = function() {
-            //document.getElementById('response').innerHTML = 
-alert(xhr.responseText);
-        }
 
-        xhr.onerror = function() {
-            alert("Error")
-        }
 
-        xhr.send()
-    }
+    <style type="text/css" media="screen">
+      body {
+	  width: 720px;
+	  margin: auto;
+	  color: #555;
+	  font-family: verdana, sans-serif;
+      }
+      h1 {
+	  font-size: 25px;
+	  color: #555;
+	  margin-bottom: 30px;
+      }
+      #responseget, #responsepost {
+          background-color: black;
+          color: white;
+          padding: 10px;
+          min-width: 100px;
+          display: block;
+	  margin: 0;
+	  margin-top: 5px;
+      }
+      .help {
+	  display: block;
+	  font-size: 12px;
+	  font-style: italic;
+      }
+      div.row {
+	  margin-bottom: 20px;
+      }
+      span.desc {
+	  font-weight: bold;
+	  color: #440000;
+      }
+      a {
+	  color: #4455aa;
+	  text-decoration: none;
+      }
+      a:hover { text-decoration: underline; }
+      div.description {
+	  margin-bottom: 20px;
+      }
+    </style>
+  </head>
 
-    function callOtherDomain() {
-        try {
-            doCallOtherDomain()
-        } catch (e) {
-            alert("В этом браузере данная фича не поддерживается.")
-        }
-    }
+  <body>
+    <h1>Cross-Browser, Cross-Domain Ajax Requests</h1>
 
-    </script>
-</head>
-<body>
+    <div class="description">
+    <div class="row">
+      <span class="desc">Testing cross-domain POST request ...</span>
+      <pre id="responsepost">&nbsp;</pre>
+      <span class="help">You should see a greeting from TheBuzzEngine</span>
+    </div>
 
-<div id="response"></div>
-    <input value="Нажмите для запроса к другому домену" onclick="callOtherDomain()" />
-
-</body>
+    </body>
 </html>
