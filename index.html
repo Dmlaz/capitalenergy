@@ -1,37 +1,51 @@
-<access origin="http://vneformate.ru" />
-<script>
-  
-// 1. Создаём новый объект
-  XMLHttpRequest
-var xhr = new XMLHttpRequest();
-  
+<html>
+<head>
+<title>Simple Ajax Example</title>
+<script language="Javascript">
+function myAjax(myPHP,myToChange) {
+      if (window.XMLHttpRequest) {    // for Mozilla and Safari Browsers
+        myXML = new XMLHttpRequest();
+    }
+    else if (window.ActiveXObject) {      // For IE Browsers
+        myXML = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    myXML.open('POST', myPHP, true);
+    myXML.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    myXML.onreadystatechange = function() {
+        if (myXML.readyState == 4) {
+            document.getElementById(myToChange).innerHTML = myXML.responseText; // writes to the div
+        }
+    }
+    myXML.send();
+}
+ 
+</script>
+</head>
 
-// 2. Конфигурируем его: GET-запрос на URL 'phones.json'
-  
-xhr.open('GET', 'http://vneformate.ru/phones.json', false);
-  
-
-// 3. Отсылаем запрос
-  
-xhr.send();
+<body onload="document.myForm.myWord.select()">
 
 
-  // 4. Если код ответа сервера не 200, то это ошибка
-  
-if (xhr.status != 200) {
 
-    // обработать ошибку
-  
-    alert( xhr.status + ': ' + xhr.statusText ); 
-    // пример вывода: 404: Not Found
 
-  } else 
-  {
-  
-    // вывести результат
-  
-    alert( xhr.responseText );
-} 
-    // responseText -- текст ответа.
-  
-  </script>
+<body style="font-size:25px">
+
+AJAX Hello World <br><br>
+
+
+
+
+
+<input type=button value="More Advanced AJAX" style="font-size:30px" onclick="location='advancedAjax.html'"><br><br>
+
+
+
+<form name="myForm">
+    AJAX example<br>
+    Type Something: <input name="myWord" type="text" onKeyUp="myAjax('http://vneformate.ru/android.php','myDiv')">  
+    <div id="myDiv">This is where the php stuff will go</div>
+</form>
+
+
+
+</body>
+</html>
