@@ -1,51 +1,43 @@
 <html>
 <head>
-<title>Simple Ajax Example</title>
-<script language="Javascript">
-function myAjax(myPHP,myToChange) {
-      if (window.XMLHttpRequest) {    // for Mozilla and Safari Browsers
-        myXML = new XMLHttpRequest();
+
+<script type="text/javascript">
+    var url = 'http://vneformate.ru/phones.json';
+
+
+    function doCallOtherDomain(){
+        var XHR = window.XDomainRequest || window.XMLHttpRequest
+        var xhr = new XHR();
+
+        xhr.open('GET', url, true);
+
+        // замена onreadystatechange
+        xhr.onload = function() {
+            //document.getElementById('response').innerHTML = 
+alert(xhr.responseText);
+        }
+
+        xhr.onerror = function() {
+            alert("Error")
+        }
+
+        xhr.send()
     }
-    else if (window.ActiveXObject) {      // For IE Browsers
-        myXML = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    myXML.open('POST', myPHP, true);
-    myXML.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    myXML.onreadystatechange = function() {
-        if (myXML.readyState == 4) {
-            document.getElementById(myToChange).innerHTML = myXML.responseText; // writes to the div
+
+    function callOtherDomain() {
+        try {
+            doCallOtherDomain()
+        } catch (e) {
+            alert("В этом браузере данная фича не поддерживается.")
         }
     }
-    myXML.send();
-}
- 
-</script>
+
+    </script>
 </head>
+<body>
 
-<body onload="document.myForm.myWord.select()">
-
-
-
-
-<body style="font-size:25px">
-
-AJAX Hello World <br><br>
-
-
-
-
-
-<input type=button value="More Advanced AJAX" style="font-size:30px" onclick="location='advancedAjax.html'"><br><br>
-
-
-
-<form name="myForm">
-    AJAX example<br>
-    Type Something: <input name="myWord" type="text" onKeyUp="myAjax('http://vneformate.ru/android.php','myDiv')">  
-    <div id="myDiv">This is where the php stuff will go</div>
-</form>
-
-
+<div id="response"></div>
+    <input value="Нажмите для запроса к другому домену" onclick="callOtherDomain()" />
 
 </body>
 </html>
