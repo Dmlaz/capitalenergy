@@ -1,5 +1,7 @@
 // xhr.open('GET', 'https://users.quickblox.com/users.json', false);
 
+$(document).ready(function(){
+
 $.ajax({
  type: "POST",
  url:"http://vneformate.ru/android.php",
@@ -17,3 +19,5 @@ $.ajax({
    }
   }
 });
+
+}
