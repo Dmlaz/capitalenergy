@@ -1,36 +1,18 @@
-/* $.ajax({
-            type: 'GET',
-            url: "http://vneformate.ru/android.php",
-            crossDomain: true,
-            success: function (data, textStatus, jqXHR) {
-                alert("Ok!");
-                $("#retorno").html(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert("Wait, take a look: " + textStatus + ", " + errorThrown);
-            },
-            complete: function (jqXHR, textStatus ) {
-                alert("Status: " + textStatus);
-            }
-        }); 
+// 1. Создаём новый объект XMLHttpRequest
+var xhr = new XMLHttpRequest();
 
+// 2. Конфигурируем его: GET-запрос на URL 'phones.json'
+xhr.open('GET', 'https://users.quickblox.com/users.json', false);
 
-*/
+// 3. Отсылаем запрос
+xhr.send();
 
-      var jquery_path = "js/jquery.js";
-
-      // stupid workaround, as IExplorer is sometimes configured to not send the HTTP_REFERER
-      var origin = (window.location + '').match(/(https?:\/\/[^\/]+)/)[1];
-
-      crossdomain.async_load_javascript(jquery_path, function () {
-        $(function () {
-
-          crossdomain.ajax({
-            type: "POST",
-            url: "http://vneformate.ru/android.php",
-            success: function (txt) {
-              $('#responsepost').html(txt);
-            }
-          });
-        });
-      });
+// 4. Если код ответа сервера не 200, то это ошибка
+if (xhr.status != 200) {
+  // обработать ошибку
+  alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
+} else {
+  // вывести результат
+  alert( xhr.responseText ); // responseText -- текст ответа.
+}
+alert("check");
